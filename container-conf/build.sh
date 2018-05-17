@@ -7,6 +7,8 @@ build_dockerfile_aux='ENTRYPOINT []'
 build_as_root() {
     cd "$build_guest_conf"
     build_create_run_user
+    # duplicate access log file
+    rm -f /etc/apache2/conf-enabled/other-vhosts-access-log.conf
     # hardwires the ports, and hardwired include
     install -m 444 /dev/null /etc/apache2/ports.conf
     install -m 555 /dev/stdin /usr/local/bin/occ <<'EOF'
